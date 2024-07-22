@@ -12,5 +12,6 @@
   "verse": "Ayat",
   "description": "Deskripsi",
   "listen": "Dengarkan",
-  "stop": "Berhenti"
+  "stop": "Berhenti",
+  "searchEpistleNameOrNumber": "Cari nama/nomor Surat"
 }

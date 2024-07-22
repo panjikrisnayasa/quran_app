@@ -39,45 +39,68 @@ class _EpistleListScreenState extends ConsumerState<EpistleListScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: _epistlesUiState(),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: context.localizations.searchEpistleNameOrNumber,
+                  hintStyle: const TextStyle(
+                    color: Colors.black38,
+                  ),
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                textInputAction: TextInputAction.search,
+                onChanged: ref.read(_controller.notifier).onSearch,
+              ),
+            ),
+            _epistlesUiState(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _epistlesUiState() {
-    return Consumer(
-      builder: (_, ref, child) {
-        final epistlesUiState = ref.watch(
-          _controller.select((value) => value.epistlesUiState),
-        );
+    return Expanded(
+      child: Consumer(
+        builder: (_, ref, child) {
+          final epistlesUiState = ref.watch(
+            _controller.select((value) => value.epistlesUiState),
+          );
 
-        return epistlesUiState.when(
-          data: (data) {
-            if (data.isEmpty) {
-              return EmptyDataWidget(
-                text: context.localizations.noEpistlesData,
+          return epistlesUiState.when(
+            data: (data) {
+              if (data.isEmpty) {
+                return EmptyDataWidget(
+                  text: context.localizations.noEpistlesData,
+                );
+              }
+
+              return _epistleList(data);
+            },
+            error: (_, __) {
+              return ErrorStateWidget(
+                onRetry: ref.read(_controller.notifier).onReload,
               );
-            }
-
-            return _epistleList(data);
-          },
-          error: (_, __) {
-            return ErrorStateWidget(
-              onRetry: ref.read(_controller.notifier).onReload,
-            );
-          },
-          loading: () {
-            return const LoadingStateWidget();
-          },
-        );
-      },
+            },
+            loading: () {
+              return const LoadingStateWidget();
+            },
+          );
+        },
+      ),
     );
   }
 
   Widget _epistleList(List<EpistleResponse> data) {
     return ListView.builder(
       key: const Key('epistle_list'),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 16),
       itemCount: data.length,
       itemBuilder: (context, index) {
         final epistle = data[index];

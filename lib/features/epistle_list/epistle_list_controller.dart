@@ -20,15 +20,17 @@ class EpistleListController extends StateNotifier<EpistleListUiState> {
 
   final EpistleRepository _epistleRepository;
 
+  List<EpistleResponse> _epistles = [];
+
   Future<void> onScreenLoaded() async {
-    await _getPlaystation5Games();
+    await _getEpistles();
   }
 
   Future<void> onReload() async {
-    await _getPlaystation5Games();
+    await _getEpistles();
   }
 
-  Future<void> _getPlaystation5Games() async {
+  Future<void> _getEpistles() async {
     state = state.copyWith(epistlesUiState: const AsyncValue.loading());
 
     final result = await AsyncValue.guard(
@@ -38,6 +40,30 @@ class EpistleListController extends StateNotifier<EpistleListUiState> {
     if (!mounted) return;
 
     state = state.copyWith(epistlesUiState: result);
+
+    if (result is AsyncData) {
+      _epistles = result.valueOrNull ?? [];
+    }
+  }
+
+  void onSearch(String value) {
+    if (_epistles.isEmpty) return;
+
+    if (value.isEmpty) {
+      if (!mounted) return;
+
+      state = state.copyWith(epistlesUiState: AsyncValue.data(_epistles));
+    } else {
+      final filteredEpistles = _epistles.where((element) {
+        return element.latinName.toLowerCase().contains(value.toLowerCase()) ||
+            element.number.toString().contains(value);
+      }).toList();
+
+      if (!mounted) return;
+
+      state =
+          state.copyWith(epistlesUiState: AsyncValue.data(filteredEpistles));
+    }
   }
 }
 
