@@ -17,7 +17,7 @@ class EpistleRepository {
   final HttpClient _httpClient;
 
   Future<List<EpistleResponse>> getEpistles() async {
-    final response = await _httpClient.get<List<Map<String, dynamic>>>(
+    final response = await _httpClient.get<List<dynamic>>(
       path: '/surat',
     );
 

@@ -1,5 +1,9 @@
 {
   "tryAgain": "Try Again",
   "failedToFetchData": "Failed to fetch data",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "quranApp": "Quran App",
+  "noEpistlesData": "Tidak ada data surat",
+  "numberOfVerses": "Jumlah ayat",
+  "meaning": "Arti"
 }

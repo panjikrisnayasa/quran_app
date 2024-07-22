@@ -27,7 +27,7 @@ void main() {
   group('Validate getEpistles()', () {
     test('getEpistles() success', () async {
       when(
-        () => httpClient.get<List<Map<String, dynamic>>>(
+        () => httpClient.get<List<dynamic>>(
           path: '/surat',
         ),
       ).thenAnswer((_) async => _mockEpistleResponseList);
@@ -42,7 +42,7 @@ void main() {
 
     test('getEpistles() got exception', () async {
       when(
-        () => httpClient.get<List<Map<String, dynamic>>>(
+        () => httpClient.get<List<dynamic>>(
           path: '/surat',
         ),
       ).thenThrow(exception);
