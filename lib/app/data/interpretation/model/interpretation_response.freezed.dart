@@ -40,10 +40,6 @@ mixin _$InterpretationResponse {
   @JsonKey(name: 'tafsir')
   List<Interpretation> get interpretations =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'surat_selanjutnya')
-  EpistleResponse get nextEpistle => throw _privateConstructorUsedError;
-  @JsonKey(name: 'surat_sebelumnya')
-  EpistleResponse get previousEpistle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,12 +63,7 @@ abstract class $InterpretationResponseCopyWith<$Res> {
       @JsonKey(name: 'arti') String meaning,
       @JsonKey(name: 'deskripsi') String description,
       String audio,
-      @JsonKey(name: 'tafsir') List<Interpretation> interpretations,
-      @JsonKey(name: 'surat_selanjutnya') EpistleResponse nextEpistle,
-      @JsonKey(name: 'surat_sebelumnya') EpistleResponse previousEpistle});
-
-  $EpistleResponseCopyWith<$Res> get nextEpistle;
-  $EpistleResponseCopyWith<$Res> get previousEpistle;
+      @JsonKey(name: 'tafsir') List<Interpretation> interpretations});
 }
 
 /// @nodoc
@@ -99,8 +90,6 @@ class _$InterpretationResponseCopyWithImpl<$Res,
     Object? description = null,
     Object? audio = null,
     Object? interpretations = null,
-    Object? nextEpistle = null,
-    Object? previousEpistle = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -143,31 +132,7 @@ class _$InterpretationResponseCopyWithImpl<$Res,
           ? _value.interpretations
           : interpretations // ignore: cast_nullable_to_non_nullable
               as List<Interpretation>,
-      nextEpistle: null == nextEpistle
-          ? _value.nextEpistle
-          : nextEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
-      previousEpistle: null == previousEpistle
-          ? _value.previousEpistle
-          : previousEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $EpistleResponseCopyWith<$Res> get nextEpistle {
-    return $EpistleResponseCopyWith<$Res>(_value.nextEpistle, (value) {
-      return _then(_value.copyWith(nextEpistle: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $EpistleResponseCopyWith<$Res> get previousEpistle {
-    return $EpistleResponseCopyWith<$Res>(_value.previousEpistle, (value) {
-      return _then(_value.copyWith(previousEpistle: value) as $Val);
-    });
   }
 }
 
@@ -190,14 +155,7 @@ abstract class _$$InterpretationResponseImplCopyWith<$Res>
       @JsonKey(name: 'arti') String meaning,
       @JsonKey(name: 'deskripsi') String description,
       String audio,
-      @JsonKey(name: 'tafsir') List<Interpretation> interpretations,
-      @JsonKey(name: 'surat_selanjutnya') EpistleResponse nextEpistle,
-      @JsonKey(name: 'surat_sebelumnya') EpistleResponse previousEpistle});
-
-  @override
-  $EpistleResponseCopyWith<$Res> get nextEpistle;
-  @override
-  $EpistleResponseCopyWith<$Res> get previousEpistle;
+      @JsonKey(name: 'tafsir') List<Interpretation> interpretations});
 }
 
 /// @nodoc
@@ -223,8 +181,6 @@ class __$$InterpretationResponseImplCopyWithImpl<$Res>
     Object? description = null,
     Object? audio = null,
     Object? interpretations = null,
-    Object? nextEpistle = null,
-    Object? previousEpistle = null,
   }) {
     return _then(_$InterpretationResponseImpl(
       status: null == status
@@ -267,14 +223,6 @@ class __$$InterpretationResponseImplCopyWithImpl<$Res>
           ? _value._interpretations
           : interpretations // ignore: cast_nullable_to_non_nullable
               as List<Interpretation>,
-      nextEpistle: null == nextEpistle
-          ? _value.nextEpistle
-          : nextEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
-      previousEpistle: null == previousEpistle
-          ? _value.previousEpistle
-          : previousEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
     ));
   }
 }
@@ -294,11 +242,7 @@ class _$InterpretationResponseImpl implements _InterpretationResponse {
       @JsonKey(name: 'deskripsi') this.description = '',
       this.audio = '',
       @JsonKey(name: 'tafsir')
-      final List<Interpretation> interpretations = const [],
-      @JsonKey(name: 'surat_selanjutnya')
-      this.nextEpistle = const EpistleResponse(),
-      @JsonKey(name: 'surat_sebelumnya')
-      this.previousEpistle = const EpistleResponse()})
+      final List<Interpretation> interpretations = const []})
       : _interpretations = interpretations;
 
   factory _$InterpretationResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -341,15 +285,8 @@ class _$InterpretationResponseImpl implements _InterpretationResponse {
   }
 
   @override
-  @JsonKey(name: 'surat_selanjutnya')
-  final EpistleResponse nextEpistle;
-  @override
-  @JsonKey(name: 'surat_sebelumnya')
-  final EpistleResponse previousEpistle;
-
-  @override
   String toString() {
-    return 'InterpretationResponse(status: $status, number: $number, name: $name, latinName: $latinName, numberOfVerses: $numberOfVerses, placeOfDescent: $placeOfDescent, meaning: $meaning, description: $description, audio: $audio, interpretations: $interpretations, nextEpistle: $nextEpistle, previousEpistle: $previousEpistle)';
+    return 'InterpretationResponse(status: $status, number: $number, name: $name, latinName: $latinName, numberOfVerses: $numberOfVerses, placeOfDescent: $placeOfDescent, meaning: $meaning, description: $description, audio: $audio, interpretations: $interpretations)';
   }
 
   @override
@@ -371,11 +308,7 @@ class _$InterpretationResponseImpl implements _InterpretationResponse {
                 other.description == description) &&
             (identical(other.audio, audio) || other.audio == audio) &&
             const DeepCollectionEquality()
-                .equals(other._interpretations, _interpretations) &&
-            (identical(other.nextEpistle, nextEpistle) ||
-                other.nextEpistle == nextEpistle) &&
-            (identical(other.previousEpistle, previousEpistle) ||
-                other.previousEpistle == previousEpistle));
+                .equals(other._interpretations, _interpretations));
   }
 
   @JsonKey(ignore: true)
@@ -391,9 +324,7 @@ class _$InterpretationResponseImpl implements _InterpretationResponse {
       meaning,
       description,
       audio,
-      const DeepCollectionEquality().hash(_interpretations),
-      nextEpistle,
-      previousEpistle);
+      const DeepCollectionEquality().hash(_interpretations));
 
   @JsonKey(ignore: true)
   @override
@@ -412,19 +343,18 @@ class _$InterpretationResponseImpl implements _InterpretationResponse {
 
 abstract class _InterpretationResponse implements InterpretationResponse {
   const factory _InterpretationResponse(
-      {final bool status,
-      @JsonKey(name: 'nomor') final int number,
-      @JsonKey(name: 'nama') final String name,
-      @JsonKey(name: 'nama_latin') final String latinName,
-      @JsonKey(name: 'jumlah_ayat') final int numberOfVerses,
-      @JsonKey(name: 'tempat_turun') final String placeOfDescent,
-      @JsonKey(name: 'arti') final String meaning,
-      @JsonKey(name: 'deskripsi') final String description,
-      final String audio,
-      @JsonKey(name: 'tafsir') final List<Interpretation> interpretations,
-      @JsonKey(name: 'surat_selanjutnya') final EpistleResponse nextEpistle,
-      @JsonKey(name: 'surat_sebelumnya')
-      final EpistleResponse previousEpistle}) = _$InterpretationResponseImpl;
+          {final bool status,
+          @JsonKey(name: 'nomor') final int number,
+          @JsonKey(name: 'nama') final String name,
+          @JsonKey(name: 'nama_latin') final String latinName,
+          @JsonKey(name: 'jumlah_ayat') final int numberOfVerses,
+          @JsonKey(name: 'tempat_turun') final String placeOfDescent,
+          @JsonKey(name: 'arti') final String meaning,
+          @JsonKey(name: 'deskripsi') final String description,
+          final String audio,
+          @JsonKey(name: 'tafsir')
+          final List<Interpretation> interpretations}) =
+      _$InterpretationResponseImpl;
 
   factory _InterpretationResponse.fromJson(Map<String, dynamic> json) =
       _$InterpretationResponseImpl.fromJson;
@@ -457,12 +387,6 @@ abstract class _InterpretationResponse implements InterpretationResponse {
   @override
   @JsonKey(name: 'tafsir')
   List<Interpretation> get interpretations;
-  @override
-  @JsonKey(name: 'surat_selanjutnya')
-  EpistleResponse get nextEpistle;
-  @override
-  @JsonKey(name: 'surat_sebelumnya')
-  EpistleResponse get previousEpistle;
   @override
   @JsonKey(ignore: true)
   _$$InterpretationResponseImplCopyWith<_$InterpretationResponseImpl>

@@ -1,7 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:quran_app/app/data/epistle/model/epistle_response.dart';
 
 part 'interpretation_response.freezed.dart';
 part 'interpretation_response.g.dart';
@@ -20,12 +19,6 @@ class InterpretationResponse with _$InterpretationResponse {
     @JsonKey(name: 'deskripsi') @Default('') String description,
     @Default('') String audio,
     @JsonKey(name: 'tafsir') @Default([]) List<Interpretation> interpretations,
-    @JsonKey(name: 'surat_selanjutnya')
-    @Default(EpistleResponse())
-    EpistleResponse nextEpistle,
-    @JsonKey(name: 'surat_sebelumnya')
-    @Default(EpistleResponse())
-    EpistleResponse previousEpistle,
   }) = _InterpretationResponse;
 
   factory InterpretationResponse.fromJson(Map<String, dynamic> json) =>

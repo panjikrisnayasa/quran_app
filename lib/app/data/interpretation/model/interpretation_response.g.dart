@@ -22,14 +22,6 @@ _$InterpretationResponseImpl _$$InterpretationResponseImplFromJson(
               ?.map((e) => Interpretation.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      nextEpistle: json['surat_selanjutnya'] == null
-          ? const EpistleResponse()
-          : EpistleResponse.fromJson(
-              json['surat_selanjutnya'] as Map<String, dynamic>),
-      previousEpistle: json['surat_sebelumnya'] == null
-          ? const EpistleResponse()
-          : EpistleResponse.fromJson(
-              json['surat_sebelumnya'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$InterpretationResponseImplToJson(
@@ -45,8 +37,6 @@ Map<String, dynamic> _$$InterpretationResponseImplToJson(
       'deskripsi': instance.description,
       'audio': instance.audio,
       'tafsir': instance.interpretations,
-      'surat_selanjutnya': instance.nextEpistle,
-      'surat_sebelumnya': instance.previousEpistle,
     };
 
 _$InterpretationImpl _$$InterpretationImplFromJson(Map<String, dynamic> json) =>
