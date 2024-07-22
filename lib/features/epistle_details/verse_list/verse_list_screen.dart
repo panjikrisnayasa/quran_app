@@ -26,33 +26,57 @@ class _VerseListScreenState extends ConsumerState<VerseListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (_, ref, child) {
-        final detailsUiState =
-            ref.watch(_controller.select((value) => value.detailsUiState));
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: context.localizations.searchVerseNumber,
+              hintStyle: const TextStyle(
+                color: Colors.black38,
+              ),
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.search,
+            onChanged: ref.read(_controller.notifier).onSearch,
+          ),
+        ),
+        Expanded(
+          child: Consumer(
+            builder: (_, ref, child) {
+              final detailsUiState = ref
+                  .watch(_controller.select((value) => value.detailsUiState));
 
-        return detailsUiState.when(
-          data: (data) {
-            final verses = data.verses;
+              return detailsUiState.when(
+                data: (data) {
+                  final verses = data.verses;
 
-            if (verses.isEmpty) {
-              return EmptyDataWidget(
-                text: context.localizations.noVersesData,
+                  if (verses.isEmpty) {
+                    return EmptyDataWidget(
+                      text: context.localizations.noVersesData,
+                    );
+                  }
+
+                  return _verseList(verses);
+                },
+                error: (_, __) {
+                  return ErrorStateWidget(
+                    onRetry: ref.watch(_controller.notifier).onReload,
+                  );
+                },
+                loading: () {
+                  return const LoadingStateWidget();
+                },
               );
-            }
-
-            return _verseList(verses);
-          },
-          error: (_, __) {
-            return ErrorStateWidget(
-              onRetry: ref.watch(_controller.notifier).onReload,
-            );
-          },
-          loading: () {
-            return const LoadingStateWidget();
-          },
-        );
-      },
+            },
+          ),
+        ),
+      ],
     );
   }
 

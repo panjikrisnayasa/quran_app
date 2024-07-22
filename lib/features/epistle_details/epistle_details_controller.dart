@@ -22,6 +22,7 @@ class EpistleDetailsController extends StateNotifier<EpistleDetailsUiState> {
   final EpistleRepository _epistleRepository;
 
   int _number = 0;
+  EpistleDetailsResponse? _details;
 
   Future<void> onScreenLoaded({
     required int number,
@@ -45,6 +46,33 @@ class EpistleDetailsController extends StateNotifier<EpistleDetailsUiState> {
     if (!mounted) return;
 
     state = state.copyWith(detailsUiState: result);
+
+    if (result is AsyncData) {
+      _details = result.valueOrNull;
+    }
+  }
+
+  void onSearch(String value) {
+    if (_details == null) return;
+    if (_details!.verses.isEmpty) return;
+
+    if (value.isEmpty) {
+      if (!mounted) return;
+
+      state = state.copyWith(detailsUiState: AsyncValue.data(_details!));
+    } else {
+      final filteredVerses = _details!.verses.where((element) {
+        return element.number.toString().contains(value);
+      }).toList();
+
+      if (!mounted) return;
+
+      state = state.copyWith(
+        detailsUiState: AsyncValue.data(
+          _details!.copyWith(verses: filteredVerses),
+        ),
+      );
+    }
   }
 }
 

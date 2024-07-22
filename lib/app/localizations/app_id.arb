@@ -13,5 +13,6 @@
   "description": "Deskripsi",
   "listen": "Dengarkan",
   "stop": "Berhenti",
-  "searchEpistleNameOrNumber": "Cari nama/nomor Surat"
+  "searchEpistleNameOrNumber": "Cari nama/nomor Surat",
+  "searchVerseNumber": "Cari nomor Ayat. Contoh: 12"
 }
