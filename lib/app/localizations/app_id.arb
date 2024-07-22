@@ -4,6 +4,13 @@
   "loading": "Loading...",
   "quranApp": "Quran App",
   "noEpistlesData": "Tidak ada data surat",
+  "noVersesData": "Tidak ada data ayat",
   "numberOfVerses": "Jumlah ayat",
-  "meaning": "Arti"
+  "meaning": "Arti",
+  "placeOfDescent": "Tempat turun",
+  "audio": "Audio",
+  "verse": "Ayat",
+  "description": "Deskripsi",
+  "listen": "Dengarkan",
+  "stop": "Berhenti"
 }
