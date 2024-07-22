@@ -39,10 +39,6 @@ mixin _$EpistleDetailsResponse {
   bool get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'ayat')
   List<Verse> get verses => throw _privateConstructorUsedError;
-  @JsonKey(name: 'surat_selanjutnya')
-  EpistleResponse get nextEpistle => throw _privateConstructorUsedError;
-  @JsonKey(name: 'surat_sebelumnya')
-  EpistleResponse get previousEpistle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,12 +62,7 @@ abstract class $EpistleDetailsResponseCopyWith<$Res> {
       @JsonKey(name: 'deskripsi') String description,
       String audio,
       bool status,
-      @JsonKey(name: 'ayat') List<Verse> verses,
-      @JsonKey(name: 'surat_selanjutnya') EpistleResponse nextEpistle,
-      @JsonKey(name: 'surat_sebelumnya') EpistleResponse previousEpistle});
-
-  $EpistleResponseCopyWith<$Res> get nextEpistle;
-  $EpistleResponseCopyWith<$Res> get previousEpistle;
+      @JsonKey(name: 'ayat') List<Verse> verses});
 }
 
 /// @nodoc
@@ -98,8 +89,6 @@ class _$EpistleDetailsResponseCopyWithImpl<$Res,
     Object? audio = null,
     Object? status = null,
     Object? verses = null,
-    Object? nextEpistle = null,
-    Object? previousEpistle = null,
   }) {
     return _then(_value.copyWith(
       number: null == number
@@ -142,31 +131,7 @@ class _$EpistleDetailsResponseCopyWithImpl<$Res,
           ? _value.verses
           : verses // ignore: cast_nullable_to_non_nullable
               as List<Verse>,
-      nextEpistle: null == nextEpistle
-          ? _value.nextEpistle
-          : nextEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
-      previousEpistle: null == previousEpistle
-          ? _value.previousEpistle
-          : previousEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $EpistleResponseCopyWith<$Res> get nextEpistle {
-    return $EpistleResponseCopyWith<$Res>(_value.nextEpistle, (value) {
-      return _then(_value.copyWith(nextEpistle: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $EpistleResponseCopyWith<$Res> get previousEpistle {
-    return $EpistleResponseCopyWith<$Res>(_value.previousEpistle, (value) {
-      return _then(_value.copyWith(previousEpistle: value) as $Val);
-    });
   }
 }
 
@@ -189,14 +154,7 @@ abstract class _$$EpistleDetailsResponseImplCopyWith<$Res>
       @JsonKey(name: 'deskripsi') String description,
       String audio,
       bool status,
-      @JsonKey(name: 'ayat') List<Verse> verses,
-      @JsonKey(name: 'surat_selanjutnya') EpistleResponse nextEpistle,
-      @JsonKey(name: 'surat_sebelumnya') EpistleResponse previousEpistle});
-
-  @override
-  $EpistleResponseCopyWith<$Res> get nextEpistle;
-  @override
-  $EpistleResponseCopyWith<$Res> get previousEpistle;
+      @JsonKey(name: 'ayat') List<Verse> verses});
 }
 
 /// @nodoc
@@ -222,8 +180,6 @@ class __$$EpistleDetailsResponseImplCopyWithImpl<$Res>
     Object? audio = null,
     Object? status = null,
     Object? verses = null,
-    Object? nextEpistle = null,
-    Object? previousEpistle = null,
   }) {
     return _then(_$EpistleDetailsResponseImpl(
       number: null == number
@@ -266,14 +222,6 @@ class __$$EpistleDetailsResponseImplCopyWithImpl<$Res>
           ? _value._verses
           : verses // ignore: cast_nullable_to_non_nullable
               as List<Verse>,
-      nextEpistle: null == nextEpistle
-          ? _value.nextEpistle
-          : nextEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
-      previousEpistle: null == previousEpistle
-          ? _value.previousEpistle
-          : previousEpistle // ignore: cast_nullable_to_non_nullable
-              as EpistleResponse,
     ));
   }
 }
@@ -292,11 +240,7 @@ class _$EpistleDetailsResponseImpl implements _EpistleDetailsResponse {
       @JsonKey(name: 'deskripsi') this.description = '',
       this.audio = '',
       this.status = false,
-      @JsonKey(name: 'ayat') final List<Verse> verses = const [],
-      @JsonKey(name: 'surat_selanjutnya')
-      this.nextEpistle = const EpistleResponse(),
-      @JsonKey(name: 'surat_sebelumnya')
-      this.previousEpistle = const EpistleResponse()})
+      @JsonKey(name: 'ayat') final List<Verse> verses = const []})
       : _verses = verses;
 
   factory _$EpistleDetailsResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -339,15 +283,8 @@ class _$EpistleDetailsResponseImpl implements _EpistleDetailsResponse {
   }
 
   @override
-  @JsonKey(name: 'surat_selanjutnya')
-  final EpistleResponse nextEpistle;
-  @override
-  @JsonKey(name: 'surat_sebelumnya')
-  final EpistleResponse previousEpistle;
-
-  @override
   String toString() {
-    return 'EpistleDetailsResponse(number: $number, name: $name, latinName: $latinName, numberOfVerses: $numberOfVerses, placeOfDescent: $placeOfDescent, meaning: $meaning, description: $description, audio: $audio, status: $status, verses: $verses, nextEpistle: $nextEpistle, previousEpistle: $previousEpistle)';
+    return 'EpistleDetailsResponse(number: $number, name: $name, latinName: $latinName, numberOfVerses: $numberOfVerses, placeOfDescent: $placeOfDescent, meaning: $meaning, description: $description, audio: $audio, status: $status, verses: $verses)';
   }
 
   @override
@@ -368,11 +305,7 @@ class _$EpistleDetailsResponseImpl implements _EpistleDetailsResponse {
                 other.description == description) &&
             (identical(other.audio, audio) || other.audio == audio) &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._verses, _verses) &&
-            (identical(other.nextEpistle, nextEpistle) ||
-                other.nextEpistle == nextEpistle) &&
-            (identical(other.previousEpistle, previousEpistle) ||
-                other.previousEpistle == previousEpistle));
+            const DeepCollectionEquality().equals(other._verses, _verses));
   }
 
   @JsonKey(ignore: true)
@@ -388,9 +321,7 @@ class _$EpistleDetailsResponseImpl implements _EpistleDetailsResponse {
       description,
       audio,
       status,
-      const DeepCollectionEquality().hash(_verses),
-      nextEpistle,
-      previousEpistle);
+      const DeepCollectionEquality().hash(_verses));
 
   @JsonKey(ignore: true)
   @override
@@ -409,19 +340,17 @@ class _$EpistleDetailsResponseImpl implements _EpistleDetailsResponse {
 
 abstract class _EpistleDetailsResponse implements EpistleDetailsResponse {
   const factory _EpistleDetailsResponse(
-      {@JsonKey(name: 'nomor') final int number,
-      @JsonKey(name: 'nama') final String name,
-      @JsonKey(name: 'nama_latin') final String latinName,
-      @JsonKey(name: 'jumlah_ayat') final int numberOfVerses,
-      @JsonKey(name: 'tempat_turun') final String placeOfDescent,
-      @JsonKey(name: 'arti') final String meaning,
-      @JsonKey(name: 'deskripsi') final String description,
-      final String audio,
-      final bool status,
-      @JsonKey(name: 'ayat') final List<Verse> verses,
-      @JsonKey(name: 'surat_selanjutnya') final EpistleResponse nextEpistle,
-      @JsonKey(name: 'surat_sebelumnya')
-      final EpistleResponse previousEpistle}) = _$EpistleDetailsResponseImpl;
+          {@JsonKey(name: 'nomor') final int number,
+          @JsonKey(name: 'nama') final String name,
+          @JsonKey(name: 'nama_latin') final String latinName,
+          @JsonKey(name: 'jumlah_ayat') final int numberOfVerses,
+          @JsonKey(name: 'tempat_turun') final String placeOfDescent,
+          @JsonKey(name: 'arti') final String meaning,
+          @JsonKey(name: 'deskripsi') final String description,
+          final String audio,
+          final bool status,
+          @JsonKey(name: 'ayat') final List<Verse> verses}) =
+      _$EpistleDetailsResponseImpl;
 
   factory _EpistleDetailsResponse.fromJson(Map<String, dynamic> json) =
       _$EpistleDetailsResponseImpl.fromJson;
@@ -454,12 +383,6 @@ abstract class _EpistleDetailsResponse implements EpistleDetailsResponse {
   @override
   @JsonKey(name: 'ayat')
   List<Verse> get verses;
-  @override
-  @JsonKey(name: 'surat_selanjutnya')
-  EpistleResponse get nextEpistle;
-  @override
-  @JsonKey(name: 'surat_sebelumnya')
-  EpistleResponse get previousEpistle;
   @override
   @JsonKey(ignore: true)
   _$$EpistleDetailsResponseImplCopyWith<_$EpistleDetailsResponseImpl>

@@ -22,14 +22,6 @@ _$EpistleDetailsResponseImpl _$$EpistleDetailsResponseImplFromJson(
               ?.map((e) => Verse.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      nextEpistle: json['surat_selanjutnya'] == null
-          ? const EpistleResponse()
-          : EpistleResponse.fromJson(
-              json['surat_selanjutnya'] as Map<String, dynamic>),
-      previousEpistle: json['surat_sebelumnya'] == null
-          ? const EpistleResponse()
-          : EpistleResponse.fromJson(
-              json['surat_sebelumnya'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$EpistleDetailsResponseImplToJson(
@@ -45,8 +37,6 @@ Map<String, dynamic> _$$EpistleDetailsResponseImplToJson(
       'audio': instance.audio,
       'status': instance.status,
       'ayat': instance.verses,
-      'surat_selanjutnya': instance.nextEpistle,
-      'surat_sebelumnya': instance.previousEpistle,
     };
 
 _$VerseImpl _$$VerseImplFromJson(Map<String, dynamic> json) => _$VerseImpl(
