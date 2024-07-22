@@ -38,7 +38,7 @@ class EpistleCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                epistle.latinName,
+                '${epistle.number}. ${epistle.latinName}',
               ),
               const SizedBox(height: 8),
               Text(

@@ -63,7 +63,7 @@ class _DescriptionScreenState extends ConsumerState<DescriptionScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      data.latinName,
+                      '${data.number}. ${data.latinName}',
                       style: const TextStyle(
                         fontSize: 20,
                       ),

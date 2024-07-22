@@ -39,7 +39,7 @@ class _EpistleDetailsScreenState extends ConsumerState<EpistleDetailsScreen> {
       child: Scaffold(
         appBar: AppBar(
             title: Text(
-              widget.latinName,
+              '${widget.number}. ${widget.latinName}',
               style: const TextStyle(
                 color: Colors.white,
               ),
