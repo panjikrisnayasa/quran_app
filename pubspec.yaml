@@ -46,6 +46,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   http_proxy: ^1.2.2
+  flutter_html: ^3.0.0-beta.2
 
 dev_dependencies:
   flutter_test:
