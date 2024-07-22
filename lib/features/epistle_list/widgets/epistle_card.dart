@@ -20,9 +20,9 @@ class EpistleCard extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.only(
-            left: 8,
-            right: 8,
-            top: 8,
+            left: 12,
+            right: 12,
+            top: 12,
             bottom: 16,
           ),
           child: Column(
@@ -30,26 +30,21 @@ class EpistleCard extends StatelessWidget {
             children: [
               Text(
                 epistle.name,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 20,
                 ),
+                textAlign: TextAlign.end,
               ),
               const SizedBox(height: 8),
               Text(
                 epistle.latinName,
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
               ),
               const SizedBox(height: 8),
               Text(
                 '${context.localizations.numberOfVerses}: ${epistle.numberOfVerses}',
                 style: const TextStyle(
                   color: Colors.black54,
-                  fontSize: 12,
                 ),
               ),
               const SizedBox(height: 8),
@@ -57,7 +52,6 @@ class EpistleCard extends StatelessWidget {
                 '${context.localizations.meaning}: ${epistle.meaning}',
                 style: const TextStyle(
                   color: Colors.black54,
-                  fontSize: 12,
                 ),
               ),
               const SizedBox(height: 8),
@@ -69,7 +63,6 @@ class EpistleCard extends StatelessWidget {
                     margin: Margins.zero,
                     maxLines: 2,
                     textOverflow: TextOverflow.ellipsis,
-                    fontSize: FontSize(12),
                     color: Colors.black54,
                   ),
                 },

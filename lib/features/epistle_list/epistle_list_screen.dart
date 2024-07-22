@@ -5,6 +5,7 @@ import 'package:quran_app/app/localizations/localizations_extension.dart';
 import 'package:quran_app/app/widgets/empty_data_widget.dart';
 import 'package:quran_app/app/widgets/error_state_widget.dart';
 import 'package:quran_app/app/widgets/loading_state_widget.dart';
+import 'package:quran_app/features/epistle_details/epistle_details_screen.dart';
 import 'package:quran_app/features/epistle_list/epistle_list_controller.dart';
 import 'package:quran_app/features/epistle_list/widgets/epistle_card.dart';
 
@@ -44,27 +45,31 @@ class _EpistleListScreenState extends ConsumerState<EpistleListScreen> {
   }
 
   Widget _epistlesUiState() {
-    final epistlesUiState = ref.watch(
-      _controller.select((value) => value.epistlesUiState),
-    );
-
-    return epistlesUiState.when(
-      data: (data) {
-        if (data.isEmpty) {
-          return EmptyDataWidget(
-            text: context.localizations.noEpistlesData,
-          );
-        }
-
-        return _epistleList(data);
-      },
-      error: (_, __) {
-        return ErrorStateWidget(
-          onRetry: ref.read(_controller.notifier).onReload,
+    return Consumer(
+      builder: (_, ref, child) {
+        final epistlesUiState = ref.watch(
+          _controller.select((value) => value.epistlesUiState),
         );
-      },
-      loading: () {
-        return const LoadingStateWidget();
+
+        return epistlesUiState.when(
+          data: (data) {
+            if (data.isEmpty) {
+              return EmptyDataWidget(
+                text: context.localizations.noEpistlesData,
+              );
+            }
+
+            return _epistleList(data);
+          },
+          error: (_, __) {
+            return ErrorStateWidget(
+              onRetry: ref.read(_controller.notifier).onReload,
+            );
+          },
+          loading: () {
+            return const LoadingStateWidget();
+          },
+        );
       },
     );
   }
@@ -80,13 +85,27 @@ class _EpistleListScreenState extends ConsumerState<EpistleListScreen> {
         return EpistleCard(
           key: Key('epistle_item_${epistle.number}'),
           epistle: epistle,
-          onTap: () => _navigateToDetails(epistle.number),
+          onTap: () => _navigateToDetails(
+            number: epistle.number,
+            latinName: epistle.latinName,
+          ),
         );
       },
     );
   }
 
-  void _navigateToDetails(int number) {
-    // TODO: Navigate to details screen
+  void _navigateToDetails({
+    required int number,
+    required String latinName,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => EpistleDetailsScreen(
+          number: number,
+          latinName: latinName,
+        ),
+      ),
+    );
   }
 }
