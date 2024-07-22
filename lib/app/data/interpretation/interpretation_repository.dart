@@ -16,10 +16,10 @@ class InterpretationRepository {
   final HttpClient _httpClient;
 
   Future<InterpretationResponse> getInterpretationDetails({
-    required int number,
+    required int epistleNumber,
   }) async {
     final response = await _httpClient.get<Map<String, dynamic>>(
-      path: '/tafsir/$number',
+      path: '/tafsir/$epistleNumber',
     );
 
     return InterpretationResponse.fromJson(response);
