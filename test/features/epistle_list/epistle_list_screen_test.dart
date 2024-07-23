@@ -82,7 +82,7 @@ void main() {
     await tester.pumpScreen();
 
     expectEpistleListNotFound();
-    expect(find.text('Failed to fetch data'), findsOneWidget);
+    expect(find.text('Gagal mengambil data'), findsOneWidget);
     expect(_tryAgainButton, findsOneWidget);
 
     when(
@@ -162,7 +162,7 @@ extension _WidgetTesterExtension on WidgetTester {
 final _epistleList = find.byKey(const Key('epistle_list'));
 final _tryAgainButton = find.descendant(
   of: find.byType(ElevatedButton),
-  matching: find.text('Try Again'),
+  matching: find.text('Coba Lagi'),
 );
 final _searchField = find.byKey(const Key('search_field'));
 
