@@ -4,6 +4,8 @@ import 'package:quran_app/app/data/epistle/epistle_repository.dart';
 import 'package:quran_app/app/data/interpretation/interpretation_repository.dart';
 import 'package:quran_app/app/network/http_client.dart';
 
+class MockRoute extends Mock implements Route {}
+
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 final navigatorObserver = MockNavigatorObserver();
@@ -26,4 +28,6 @@ void initializeMocks() {
   reset(httpClient);
   reset(epistleRepository);
   reset(interpretationRepository);
+
+  registerFallbackValue(MockRoute());
 }

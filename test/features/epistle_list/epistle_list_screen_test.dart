@@ -21,7 +21,7 @@ void main() {
   });
 
   testWidgets(
-      'GameListScreen should show correct content when all data loaded successfully',
+      'EpistleListScreen should show correct content when all data loaded successfully',
       (tester) async {
     await tester.pumpScreen();
 
@@ -33,8 +33,47 @@ void main() {
     );
   });
 
+  testWidgets('Push screen when tap on an epistle card', (tester) async {
+    await tester.pumpScreen();
+
+    await tester.tap(find.byKey(const Key('epistle_item_1')));
+
+    verifyInOrder([
+      () => epistleRepository.getEpistles(),
+      () => navigatorObserver.didPush(any(), any()),
+    ]);
+  });
+
+  testWidgets('Search and find out the epistle', (tester) async {
+    await tester.pumpScreen();
+
+    await tester.enterText(_searchField, '1');
+    await tester.pumpAndSettle();
+
+    expect(find.byType(EpistleCard), findsOneWidget);
+    expect(find.text('1. latinName'), findsOneWidget);
+
+    verify(
+      () => epistleRepository.getEpistles(),
+    );
+  });
+
+  testWidgets('Search epistle but got no data', (tester) async {
+    await tester.pumpScreen();
+
+    await tester.enterText(_searchField, '12');
+    await tester.pumpAndSettle();
+
+    expectEpistleListNotFound();
+    expect(find.text('Tidak ada data Surat'), findsOneWidget);
+
+    verify(
+      () => epistleRepository.getEpistles(),
+    );
+  });
+
   testWidgets(
-      'GameListScreen should show correct content when got error and reload the screen when press Try Again button',
+      'EpistleListScreen should show correct content when got error and reload the screen when press Try Again button',
       (tester) async {
     when(
       () => epistleRepository.getEpistles(),
@@ -63,7 +102,7 @@ void main() {
   });
 
   testWidgets(
-      'GameListScreen should show correct content when game list is empty',
+      'EpistleListScreen should show correct content when the list data is empty',
       (tester) async {
     when(
       () => epistleRepository.getEpistles(),
@@ -74,7 +113,7 @@ void main() {
     await tester.pumpScreen();
 
     expectEpistleListNotFound();
-    expect(find.text('Tidak ada data surat'), findsOneWidget);
+    expect(find.text('Tidak ada data Surat'), findsOneWidget);
 
     verify(
       () => epistleRepository.getEpistles(),
@@ -125,6 +164,7 @@ final _tryAgainButton = find.descendant(
   of: find.byType(ElevatedButton),
   matching: find.text('Try Again'),
 );
+final _searchField = find.byKey(const Key('search_field'));
 
 final _epistleResponseList = <EpistleResponse>[
   const EpistleResponse(

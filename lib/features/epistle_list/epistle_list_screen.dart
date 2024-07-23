@@ -44,6 +44,7 @@ class _EpistleListScreenState extends ConsumerState<EpistleListScreen> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: TextField(
+                key: const Key('search_field'),
                 decoration: InputDecoration(
                   hintText: context.localizations.searchEpistleNameOrNumber,
                   hintStyle: const TextStyle(
