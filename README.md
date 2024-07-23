@@ -2,15 +2,16 @@
 
 A Quran App
 
-## Getting Started
+## Features
+1. See epistle (Surat) list
+2. Search epistle
+3. See epistle details
+4. See epistle's verse (Ayat) list
+5. Search epistle's verse
+6. See verse's interpretation
 
-This project is a starting point for a Flutter application.
+## App Demo
+https://drive.google.com/file/d/1wiw3raNOGt3PMA0t6w08btZLeBL_XWU7/view?usp=sharing
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## APK Download
+https://drive.google.com/file/d/1ObYmgaKeaabxRvssQCnidZ2EyQlY1z0N/view?usp=sharing
