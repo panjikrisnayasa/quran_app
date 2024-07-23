@@ -6,9 +6,10 @@ A Quran App
 1. See epistle (Surat) list
 2. Search epistle
 3. See epistle details
-4. See epistle's verse (Ayat) list
-5. Search epistle's verse
-6. See verse's interpretation
+4. Listen to epistle audio
+5. See epistle's verse (Ayat) list
+6. Search epistle's verse
+7. See verse's interpretation
 
 ## App Demo
 https://drive.google.com/file/d/1wiw3raNOGt3PMA0t6w08btZLeBL_XWU7/view?usp=sharing
