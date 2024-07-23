@@ -12,7 +12,10 @@ A Quran App
 7. See verse's interpretation
 
 ## App Demo
-https://drive.google.com/file/d/1wiw3raNOGt3PMA0t6w08btZLeBL_XWU7/view?usp=sharing
+https://drive.google.com/file/d/1RvfQHKHC2rMkhv97lgiesk2mOiG7xfW9/view?usp=sharing
 
 ## APK Download
 https://drive.google.com/file/d/1ObYmgaKeaabxRvssQCnidZ2EyQlY1z0N/view?usp=sharing
+
+## Notes
+This app has unit tests, but they don't cover every case yet because it is still in progress. The unit tests can be found in the `test` folder.
