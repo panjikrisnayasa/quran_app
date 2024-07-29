@@ -1,8 +1,9 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:quran_app/app/localizations/localizations_extension.dart';
+import 'package:quran_app/app/services/service_locator.dart';
 import 'package:quran_app/app/widgets/error_state_widget.dart';
 import 'package:quran_app/app/widgets/loading_state_widget.dart';
 import 'package:quran_app/features/epistle_details/epistle_details_controller.dart';
@@ -16,20 +17,17 @@ class DescriptionScreen extends ConsumerStatefulWidget {
 
 class _DescriptionScreenState extends ConsumerState<DescriptionScreen> {
   final _controller = EpistleDetailsController.provider;
-  final _player = AudioPlayer();
-
-  bool _isPlaying = false;
+  final _audioHandler = getIt<AudioHandler>();
 
   @override
   void initState() {
     super.initState();
-
-    _playerStateStreamListener();
+    _playbackStateListener();
   }
 
   @override
-  void dispose() {
-    _player.dispose();
+  dispose() {
+    _audioHandler.stop();
     super.dispose();
   }
 
@@ -101,7 +99,7 @@ class _DescriptionScreenState extends ConsumerState<DescriptionScreen> {
                       },
                     ),
                     const SizedBox(height: 32),
-                    _listenButton(data.audio),
+                    _listenButton(audioUrl: data.audio, title: data.latinName),
                   ],
                 ),
               ),
@@ -120,52 +118,67 @@ class _DescriptionScreenState extends ConsumerState<DescriptionScreen> {
     );
   }
 
-  Widget _listenButton(String audioUrl) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: _isPlaying ? Colors.white : Colors.blue,
-      ),
-      onPressed: () => _playStopAudio(audioUrl),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            _isPlaying ? Icons.stop_rounded : Icons.play_arrow_rounded,
-            color: _isPlaying ? Colors.blue : Colors.white,
+  Widget _listenButton({
+    required String audioUrl,
+    required String title,
+  }) {
+    return StreamBuilder<bool>(
+      stream:
+          _audioHandler.playbackState.map((state) => state.playing).distinct(),
+      builder: (context, snapshot) {
+        final isPlaying = snapshot.data ?? false;
+
+        return ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: isPlaying ? Colors.white : Colors.blue,
           ),
-          const SizedBox(width: 4),
-          Text(
-            _isPlaying
-                ? context.localizations.stop
-                : context.localizations.listen,
-            style: TextStyle(
-              color: _isPlaying ? Colors.blue : Colors.white,
-            ),
+          onPressed: () => _playStopAudio(
+            isPlaying: isPlaying,
+            audioUrl: audioUrl,
+            title: title,
           ),
-        ],
-      ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                isPlaying ? Icons.stop_rounded : Icons.play_arrow_rounded,
+                color: isPlaying ? Colors.blue : Colors.white,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                isPlaying
+                    ? context.localizations.stop
+                    : context.localizations.listen,
+                style: TextStyle(
+                  color: isPlaying ? Colors.blue : Colors.white,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  Future<void> _playStopAudio(String audioUrl) async {
-    if (_isPlaying) {
-      _player.stop();
+  Future<void> _playStopAudio({
+    required bool isPlaying,
+    required String audioUrl,
+    required String title,
+  }) async {
+    if (isPlaying) {
+      await _audioHandler.stop();
     } else {
-      await _player.setUrl(audioUrl);
-      _player.play();
-    }
+      final mediaItem = MediaItem(id: audioUrl, title: title);
 
-    setState(() {
-      _isPlaying = !_isPlaying;
-    });
+      await _audioHandler.addQueueItem(mediaItem);
+      await _audioHandler.play();
+    }
   }
 
-  void _playerStateStreamListener() {
-    _player.playerStateStream.listen((event) {
-      if (event.processingState == ProcessingState.completed) {
-        setState(() {
-          _isPlaying = false;
-        });
+  void _playbackStateListener() {
+    _audioHandler.playbackState.listen((event) {
+      if (event.processingState == AudioProcessingState.completed) {
+        _audioHandler.stop();
       }
     });
   }
