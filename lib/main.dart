@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http_proxy/http_proxy.dart';
 import 'package:quran_app/app.dart';
 import 'package:quran_app/app/network/network_config.dart';
+import 'package:quran_app/app/services/service_locator.dart';
 
-void main() {
+Future<void> main() async {
   initializeProxy();
+
+  await setupServiceLocator();
 
   runApp(
     ProviderScope(
