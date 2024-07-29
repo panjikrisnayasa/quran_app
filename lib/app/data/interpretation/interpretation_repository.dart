@@ -19,7 +19,7 @@ class InterpretationRepository {
     required int epistleNumber,
   }) async {
     final response = await _httpClient.get<Map<String, dynamic>>(
-      path: '/tafsir/$epistleNumber',
+      path: '/api/tafsir/$epistleNumber',
     );
 
     return InterpretationResponse.fromJson(response);

@@ -18,7 +18,7 @@ class EpistleRepository {
 
   Future<List<EpistleResponse>> getEpistles() async {
     final response = await _httpClient.get<List<dynamic>>(
-      path: '/surat',
+      path: '/api/surat',
     );
 
     return response.map((e) => EpistleResponse.fromJson(e)).toList();
@@ -28,7 +28,7 @@ class EpistleRepository {
     required int number,
   }) async {
     final response = await _httpClient.get<Map<String, dynamic>>(
-      path: '/surat/$number',
+      path: '/api/surat/$number',
     );
 
     return EpistleDetailsResponse.fromJson(response);
